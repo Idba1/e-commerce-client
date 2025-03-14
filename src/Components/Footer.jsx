@@ -5,7 +5,7 @@ const Footer = () => {
             <div className='container px-6 py-8 mx-auto'>
                 <div className='flex flex-col items-center text-center'>
                     <div className='flex gap-2 items-center'>
-                        <img className='w-auto h-7' src='../../public/logo.png' alt='' />
+                        <img className='w-auto h-7' src='https://i.ibb.co.com/3mQk5rXb/Colorful-Illustrative-Online-Shop-Logo.png' alt='' />
                         <span>Idba's Shop</span>
                     </div>
 
