@@ -3,7 +3,7 @@ import MainCarousel from '../../HomeCarosel/MainCarosel'
 
 function Home() {
   return (
-    <div>
+    <div className='container mx-auto'>
       <MainCarousel></MainCarousel>
     </div>
   )
