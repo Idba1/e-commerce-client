@@ -15,7 +15,6 @@ const data = [
 ];
 
 const MainCarousel = () => {
-    // Mapping over data to create carousel items with images
     const items = data.map((item, index) => (
         <div key={index} className="item">
             <img src={item.image} alt={`Carousel Image ${index + 1}`} />
