@@ -4,9 +4,8 @@ import HomeSectionCard from '../HomeSectionCard/HomeSectionCard';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import { Button } from '@mui/material';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
-import { mens_kurta } from '../../../public/men_kurta'
 
-const HomeSectionCarosel = () => {
+const HomeSectionCarosel = ({ data, sectionName }) => {
     const carouselRef = useRef(null);
     const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -16,7 +15,7 @@ const HomeSectionCarosel = () => {
         1024: { items: 5 },
     };
 
-    const items = mens_kurta.slice(0, 15).map((item, index) => (
+    const items = data.slice(0, 15).map((item, index) => (
         <HomeSectionCard product={item} key={index} />
     ));
 
@@ -43,6 +42,7 @@ const HomeSectionCarosel = () => {
 
     return (
         <div className="px-4 lg:px-8">
+            <h2 className='text-2xl font-extrabold text-gray-800 py-5 lg:py-10'>{sectionName}</h2>
             <div className="relative p-5">
                 <AliceCarousel
                     ref={carouselRef}
