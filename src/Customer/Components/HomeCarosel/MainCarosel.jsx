@@ -16,7 +16,7 @@ const data = [
 
 const MainCarousel = () => {
     const items = data.map((item, index) => (
-        <div key={index} className="item">
+        <div key={index} className="item -z-10">
             <img src={item.image} alt={`Carousel Image ${index + 1}`} />
         </div>
     ));
