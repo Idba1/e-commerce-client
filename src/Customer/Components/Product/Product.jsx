@@ -16,6 +16,7 @@ import {
 import { XMarkIcon } from '@heroicons/react/24/outline'
 import { ChevronDownIcon, FunnelIcon, MinusIcon, PlusIcon, Squares2X2Icon } from '@heroicons/react/20/solid'
 import ProductCard from './ProductCard'
+import { mens_kurta } from '../../../data/men_kurta'
 
 const sortOptions = [
     { name: 'Most Popular', href: '#', current: true },
@@ -309,8 +310,10 @@ export default function Product() {
 
                             {/* Product grid */}
                             <div className="lg:col-span-3 w-full">
-                                <div className='grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-2 p-4'> 
-                                <ProductCard></ProductCard>
+                                <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-4 gap-2 p-4'> 
+                                {
+                                    mens_kurta.map((item)=><ProductCard product={item}></ProductCard>)
+                                }
                                 </div>
                             </div>
                         </div>
