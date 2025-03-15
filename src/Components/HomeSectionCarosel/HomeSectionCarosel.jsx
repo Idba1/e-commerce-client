@@ -1,12 +1,13 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import AliceCarousel from 'react-alice-carousel';
 import HomeSectionCard from '../HomeSectionCard/HomeSectionCard';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import { Button } from '@mui/material';
-import { ChevronRightIcon } from '@heroicons/react/24/outline';
+import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 
 const HomeSectionCarosel = () => {
     const carouselRef = useRef(null);
+    const [currentIndex, setCurrentIndex] = useState(0);
 
     const responsive = {
         0: { items: 1 },
@@ -14,7 +15,7 @@ const HomeSectionCarosel = () => {
         1024: { items: 5 },
     };
 
-    const items = [1, 1, 1, 1, 1, 1].map((item, index) => (
+    const items = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1].map((item, index) => (
         <HomeSectionCard key={index} />
     ));
 
@@ -34,8 +35,13 @@ const HomeSectionCarosel = () => {
         }
     };
 
+    // Update the current index when the slide changes
+    const handleSlideChanged = ({ item }) => {
+        setCurrentIndex(item);
+    };
+
     return (
-        <div className="relative px-4 lg:px-8">
+        <div className="px-4 lg:px-8">
             <div className="relative p-5">
                 <AliceCarousel
                     ref={carouselRef}
@@ -46,6 +52,8 @@ const HomeSectionCarosel = () => {
                     autoPlayInterval={1000}
                     infinite
                     responsive={responsive}
+                    disableDotsControls
+                    onSlideChanged={handleSlideChanged}
                 />
 
                 {/* Previous Button */}
@@ -58,11 +66,15 @@ const HomeSectionCarosel = () => {
                         left: '-2rem',
                         transform: 'translateY(-50%)',
                         zIndex: 10,
+                        backgroundColor: 'white',
+                        color: 'black',
+                        padding: '0.5rem',
+                        display: currentIndex === 0 ? 'none' : 'block',
                     }}
                     onClick={handlePrev}
                     aria-label="prev"
                 >
-                    <ChevronLeftIcon />
+                    <ChevronLeftIcon sx={{ color: 'black' }} />
                 </Button>
 
                 {/* Next Button */}
@@ -75,11 +87,16 @@ const HomeSectionCarosel = () => {
                         right: '-2rem',
                         transform: 'translateY(-50%)',
                         zIndex: 10,
+                        backgroundColor: 'white',
+                        color: 'black',
+                        padding: '0.5rem',
+                        display:
+                            currentIndex === items.length - 1 ? 'none' : 'block',
                     }}
                     onClick={handleNext}
                     aria-label="next"
                 >
-                    <ChevronRightIcon />
+                    <KeyboardArrowRightIcon sx={{ color: 'black' }} />
                 </Button>
             </div>
         </div>
