@@ -4,6 +4,7 @@ import HomeSectionCard from '../HomeSectionCard/HomeSectionCard';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import { Button } from '@mui/material';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
+import { mens_kurta } from '../../ecommerce-products-data/Men/men_kurta'
 
 const HomeSectionCarosel = () => {
     const carouselRef = useRef(null);
@@ -15,8 +16,8 @@ const HomeSectionCarosel = () => {
         1024: { items: 5 },
     };
 
-    const items = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1].map((item, index) => (
-        <HomeSectionCard key={index} />
+    const items = mens_kurta.map((item, index) => (
+        <HomeSectionCard product={item} key={index} />
     ));
 
     // Handle previous button click
