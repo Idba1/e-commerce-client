@@ -20,7 +20,6 @@ const ProductCard = () => {
             whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}  
         >
-            {/* Image (without animation) */}
             <img
                 src={product.image}
                 alt={product.title}
