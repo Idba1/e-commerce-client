@@ -19,6 +19,7 @@ import ProductCard from './ProductCard'
 import { mens_kurta } from '../../../data/men_kurta'
 import { filters, singleFilter } from './FilterData'
 import { FormControl, FormControlLabel, FormLabel, Radio, RadioGroup } from '@mui/material'
+import { useLocation, useNavigate } from 'react-router-dom'
 
 const sortOptions = [
     { name: 'Price: Low to High', href: '#', current: false },
@@ -31,6 +32,39 @@ function classNames(...classes) {
 
 export default function Product() {
     const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false)
+    const location = useLocation()
+    const navigate = useNavigate();
+
+    const handleFilter = (value, sectionId) => {
+        const searchParamms = new URLSearchParams(location.search)
+        let filterValue = searchParamms.getAll(sectionId)
+
+        if (filterValue.length > 0 && filterValue[0].split(",").includes(value)) {
+            filterValue = filterValue[0].split(",").filter((item) => item != value);
+
+            if (filterValue.length === 0) {
+                searchParamms.delete(sectionId)
+            }
+        }
+        else {
+            filterValue.push(value)
+        }
+        if (filterValue.length > 0) {
+            searchParamms.set(sectionId, filterValue.join(","));
+
+        }
+        const query = searchParamms.toString();
+        navigate({ search: `?${query}` })
+    }
+
+    const handleRadioFilterChange = (e, sectionId) => {
+        const searchParamms = new URLSearchParams(location.search)
+
+        searchParamms.set(sectionId, e.target.value)
+        const query = searchParamms.toString();
+        navigate({ search: `?${query}` })
+    }
+
 
     return (
         <div className="bg-white">
@@ -243,11 +277,11 @@ export default function Product() {
 
                         <div className="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-4">
                             {/*  */}
-                           
+
                             <form className="hidden lg:block">
-                            <h1 className='text-lg opacity-50 font-bold'>
-                                Filters
-                            </h1>
+                                <h1 className='text-lg opacity-50 font-bold py-4'>
+                                    Filters
+                                </h1>
 
                                 {filters.map((section) => (
                                     <Disclosure key={section.id} as="div" className="border-b border-gray-200 py-6">
@@ -267,6 +301,7 @@ export default function Product() {
                                                         <div className="flex h-5 shrink-0 items-center">
                                                             <div className="group grid size-4 grid-cols-1">
                                                                 <input
+                                                                    onChange={() => handleFilter(option.value, section.id)}
                                                                     defaultValue={option.value}
                                                                     defaultChecked={option.checked}
                                                                     id={`filter-${section.id}-${optionIdx}`}
@@ -329,7 +364,7 @@ export default function Product() {
                                                         {section.options.map((option, optionIdx) => (
 
                                                             <>
-                                                                <FormControlLabel value={option.id} control={<Radio />} label={option.label} />
+                                                                <FormControlLabel onChange={(e)=>handleRadioFilterChange(e, section.id)} value={option.value} control={<Radio />} label={option.label} />
                                                             </>
 
 
