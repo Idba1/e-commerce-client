@@ -20,6 +20,7 @@
 import { useState } from 'react'
 import { StarIcon } from '@heroicons/react/20/solid'
 import { Radio, RadioGroup } from '@headlessui/react'
+import { Button, Rating } from '@mui/material'
 
 const product = {
     name: 'Basic Tee 6-Pack',
@@ -53,14 +54,10 @@ const product = {
         { name: 'Black', class: 'bg-gray-900', selectedClass: 'ring-gray-900' },
     ],
     sizes: [
-        { name: 'XXS', inStock: false },
-        { name: 'XS', inStock: true },
         { name: 'S', inStock: true },
         { name: 'M', inStock: true },
         { name: 'L', inStock: true },
         { name: 'XL', inStock: true },
-        { name: '2XL', inStock: true },
-        { name: '3XL', inStock: true },
     ],
     description:
         'The Basic Tee 6-Pack allows you to fully express your vibrant personality with three grayscale options. Feeling adventurous? Put on a heather gray tee. Want to be a trendsetter? Try our exclusive colorway: "Black". Need to add an extra pop of color to your outfit? Our white tee has you covered.',
@@ -142,72 +139,42 @@ export default function ProductDetails() {
 
                     {/* Product info */}
                     <div className="lg:col-span-1 max-auto max-w-2xl px-4 pb-16 sm:px-6 lg:max-w-7xl lg:px-8 lg:pb-24">
-                        <div className="lg:col-span-2 lg:border-r lg:border-gray-200 lg:pr-8">
-                            <h1 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">{product.name}</h1>
+                        <div className="lg:col-span-2 ">
+                            <h1 className="text-lg lg:text-xl font-semibold text-gray-900">Universaloutfit</h1>
+                            <h1 className='text-lg lg:text-xl text-gray-900 opacity-60 pt-1'>
+                                Casual puff Sleeves solid  Women Top
+                            </h1>
                         </div>
 
                         {/* Options */}
                         <div className="mt-4 lg:row-span-3 lg:mt-0">
                             <h2 className="sr-only">Product information</h2>
-                            <p className="text-3xl tracking-tight text-gray-900">{product.price}</p>
-
+                            <div className='flex space-x-5 items-center text-lg lg:text-xl text-gray-900 mt-6'>
+                                <p className='font-semibold'>$199</p>
+                                <p className='opacity-50 line-through'>$211</p>
+                                <p className='text-green-600 font-semibold'>5% off</p>
+                            </div>
                             {/* Reviews */}
                             <div className="mt-6">
-                                <h3 className="sr-only">Reviews</h3>
-                                <div className="flex items-center">
-                                    <div className="flex items-center">
-                                        {[0, 1, 2, 3, 4].map((rating) => (
-                                            <StarIcon
-                                                key={rating}
-                                                aria-hidden="true"
-                                                className={classNames(
-                                                    reviews.average > rating ? 'text-gray-900' : 'text-gray-200',
-                                                    'size-5 shrink-0',
-                                                )}
-                                            />
-                                        ))}
-                                    </div>
-                                    <p className="sr-only">{reviews.average} out of 5 stars</p>
-                                    <a href={reviews.href} className="ml-3 text-sm font-medium text-indigo-600 hover:text-indigo-500">
-                                        {reviews.totalCount} reviews
-                                    </a>
+                                <div className='flex items-center space-x-3'>
+                                    <Rating name="read-only" value={4.5} readOnly />
+                                    <p className='opacity-50 text-sm'>
+                                        56540 Ratings
+                                    </p>
+                                    <p className='ml-3 text-sm font-medium text-indigo-600 hover:text-indigo-500'>
+                                        3870 Reviews
+                                    </p>
                                 </div>
                             </div>
 
                             <form className="mt-10">
-                                {/* Colors */}
-                                <div>
-                                    <h3 className="text-sm font-medium text-gray-900">Color</h3>
 
-                                    <fieldset aria-label="Choose a color" className="mt-4">
-                                        <RadioGroup value={selectedColor} onChange={setSelectedColor} className="flex items-center gap-x-3">
-                                            {product.colors.map((color) => (
-                                                <Radio
-                                                    key={color.name}
-                                                    value={color}
-                                                    aria-label={color.name}
-                                                    className={classNames(
-                                                        color.selectedClass,
-                                                        'relative -m-0.5 flex cursor-pointer items-center justify-center rounded-full p-0.5 focus:outline-hidden data-checked:ring-2 data-focus:data-checked:ring-3 data-focus:data-checked:ring-offset-1',
-                                                    )}
-                                                >
-                                                    <span
-                                                        aria-hidden="true"
-                                                        className={classNames(color.class, 'size-8 rounded-full border border-black/10')}
-                                                    />
-                                                </Radio>
-                                            ))}
-                                        </RadioGroup>
-                                    </fieldset>
-                                </div>
 
                                 {/* Sizes */}
                                 <div className="mt-10">
                                     <div className="flex items-center justify-between">
                                         <h3 className="text-sm font-medium text-gray-900">Size</h3>
-                                        <a href="#" className="text-sm font-medium text-indigo-600 hover:text-indigo-500">
-                                            Size guide
-                                        </a>
+
                                     </div>
 
                                     <fieldset aria-label="Choose a size" className="mt-4">
@@ -255,12 +222,9 @@ export default function ProductDetails() {
                                     </fieldset>
                                 </div>
 
-                                <button
-                                    type="submit"
-                                    className="mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:outline-hidden"
-                                >
-                                    Add to bag
-                                </button>
+                                <Button variant='contained' sx={{ px: "2rem", py: "1rem", bgcolor: "#9155fd" }}>
+                                    Add to Cart
+                                </Button>
                             </form>
                         </div>
 
