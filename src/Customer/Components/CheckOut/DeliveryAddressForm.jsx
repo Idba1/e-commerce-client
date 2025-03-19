@@ -1,6 +1,29 @@
-import React from 'react'
+import React, { useState } from 'react';
 
 const DeliveryAddressForm = () => {
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
+    const [address, setAddress] = useState('');
+    const [city, setCity] = useState('');
+    const [state, setState] = useState('');
+    const [zip, setZip] = useState('');
+    const [phone, setPhone] = useState('');
+
+    // Handle form submission
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        
+        console.log({
+            firstName,
+            lastName,
+            address,
+            city,
+            state,
+            zip,
+            phone
+        });
+    };
+
     return (
         <div>
             {/* Address Selection & Form */}
@@ -26,33 +49,43 @@ const DeliveryAddressForm = () => {
                 </div>
 
                 {/* New Address Form */}
-                <div>
+                <form onSubmit={handleSubmit}>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <input
                             type="text"
                             placeholder="First Name *"
                             className="border p-2 rounded w-full"
+                            value={firstName}
+                            onChange={(e) => setFirstName(e.target.value)}
                         />
                         <input
                             type="text"
                             placeholder="Last Name *"
                             className="border p-2 rounded w-full"
+                            value={lastName}
+                            onChange={(e) => setLastName(e.target.value)}
                         />
                     </div>
                     <textarea
                         placeholder="Address *"
                         className="border p-2 rounded w-full mt-4 h-20"
+                        value={address}
+                        onChange={(e) => setAddress(e.target.value)}
                     ></textarea>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
                         <input
                             type="text"
                             placeholder="City *"
                             className="border p-2 rounded w-full"
+                            value={city}
+                            onChange={(e) => setCity(e.target.value)}
                         />
                         <input
                             type="text"
                             placeholder="State/Province/Region *"
                             className="border p-2 rounded w-full"
+                            value={state}
+                            onChange={(e) => setState(e.target.value)}
                         />
                     </div>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
@@ -60,21 +93,24 @@ const DeliveryAddressForm = () => {
                             type="text"
                             placeholder="Zip / Postal code *"
                             className="border p-2 rounded w-full"
+                            value={zip}
+                            onChange={(e) => setZip(e.target.value)}
                         />
                         <input
                             type="text"
                             placeholder="Phone Number *"
                             className="border p-2 rounded w-full"
+                            value={phone}
+                            onChange={(e) => setPhone(e.target.value)}
                         />
                     </div>
-                    <button className="bg-purple-600 text-white px-6 py-2 rounded mt-6 w-full">
+                    <button className="bg-purple-600 text-white px-6 py-2 rounded mt-6 w-full" type="submit">
                         DELIVERED HERE
                     </button>
-                </div>
-
-            </div >
+                </form>
+            </div>
         </div>
-    )
-}
+    );
+};
 
-export default DeliveryAddressForm
+export default DeliveryAddressForm;
