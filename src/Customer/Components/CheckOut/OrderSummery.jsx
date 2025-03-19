@@ -1,9 +1,12 @@
 import React from 'react'
+import AddressCard from '../AddressCard/AddressCard'
+import Cart from '../Cart/Cart'
 
 const OrderSummery = () => {
   return (
     <div>
-      <h1>order summery</h1>
+      <AddressCard></AddressCard>
+      <Cart></Cart>
     </div>
   )
 }
