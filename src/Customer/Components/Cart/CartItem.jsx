@@ -1,8 +1,11 @@
+import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
+import { IconButton } from "@mui/material";
 import { FaTrashAlt } from "react-icons/fa";
+import AddCircleIcon from '@mui/icons-material/AddCircle';
 
 const CartItem = () => {
     return (
-        <div className="flex flex-col  w-1/4 justify-between p-4 bg-white shadow-md rounded-lg">
+        <div className="flex flex-col  justify-between p-4 bg-white shadow-md rounded-lg">
             {/* Image */}
             <div className="flex items-center space-x-4">
                 <img
@@ -20,7 +23,7 @@ const CartItem = () => {
                     <p className="text-sm text-gray-600">Seller: SUBH LAXMI</p>
                     <div className="flex items-center space-x-2">
                         <span className="text-gray-400 line-through">₹1599</span>
-                        <span className="text-green-600 font-semibold">₹399</span>
+                        <span className="text-black font-semibold">₹399</span>
                         <span className="text-green-500 text-sm">75% off</span>
                     </div>
                 </div>
@@ -29,11 +32,15 @@ const CartItem = () => {
             {/* Quantity & Remove */}
             <div className="flex items-center space-x-4">
                 <div className="border border-gray-300 rounded-md flex items-center px-2 py-1">
-                    <button className="px-2 text-lg">-</button>
+                    <IconButton>
+                        <RemoveCircleIcon></RemoveCircleIcon>
+                    </IconButton>
                     <span className="px-2">1</span>
-                    <button className="px-2 text-lg">+</button>
+                    <IconButton  sx={{color:'purple'}}>
+                        <AddCircleIcon></AddCircleIcon>
+                    </IconButton>
                 </div>
-                <button className="text-purple-600 hover:text-red-500 text-sm flex items-center">
+                <button className="text-purple-500  hover:text-red-600 text-sm flex items-center">
                     <FaTrashAlt className="mr-1" /> REMOVE
                 </button>
             </div>
