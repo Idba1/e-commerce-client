@@ -20,7 +20,7 @@
 import { useState } from 'react'
 import { StarIcon } from '@heroicons/react/20/solid'
 import { Radio, RadioGroup } from '@headlessui/react'
-import { Button, Grid, Rating } from '@mui/material'
+import { Box, Button, Grid, LinearProgress, Rating } from '@mui/material'
 import ProductReviewCard from './ProductReviewCard'
 
 const product = {
@@ -82,7 +82,7 @@ export default function ProductDetails() {
     const [selectedSize, setSelectedSize] = useState(product.sizes[2])
 
     return (
-        <div className="bg-white">
+        <div className="bg-white lg:px-20">
             <div className="pt-6">
                 <nav aria-label="Breadcrumb">
                     <ol role="list" className="mx-auto flex max-w-2xl items-center space-x-2 px-4 sm:px-6 lg:max-w-7xl lg:px-8">
@@ -276,6 +276,66 @@ export default function ProductDetails() {
                                     {[1, 1, 1].map((item) => <ProductReviewCard></ProductReviewCard>)}
                                 </div>
 
+                            </Grid>
+
+                            <Grid item xs={5}>
+                                <h1 className='text-xl font-semibold pb-2'>Product Ratings</h1>
+                                <div className='flex space-x-3 items-center'>
+                                    <Rating readOnly value={4.6} precision={.5}></Rating>
+                                    <p className='opacity-60'>59890 Ratings</p>
+                                </div>
+
+                                <Box className='mt-5 space-y-3'>
+                                    <Grid container alignItems="center" gap={2}>
+                                        <Grid item xs={2}>
+                                            <p>Excellent</p>
+                                        </Grid>
+                                        <Grid item xs={7}>
+                                            <LinearProgress sx={{ bgcolor: '#d0d0d0', borderRadius: 4, height: 7 }} value={40} variant='determinate' color='success'></LinearProgress>
+                                        </Grid>
+                                    </Grid>
+                                    <Grid container alignItems="center" gap={2}>
+                                        <Grid item xs={2}>
+                                            <p>Very Good</p>
+                                        </Grid>
+                                        <Grid item xs={7}>
+                                            <LinearProgress sx={{ bgcolor: '#d0d0d0', borderRadius: 4, height: 7 }} value={30} variant='determinate' color='success'></LinearProgress>
+                                        </Grid>
+                                    </Grid>
+                                    <Grid container alignItems="center" gap={2}>
+                                        <Grid item xs={2}>
+                                            <p>Good</p>
+                                        </Grid>
+                                        <Grid item xs={7}>
+                                            <LinearProgress
+                                                sx={{
+                                                    bgcolor: '#d0d0d0',
+                                                    borderRadius: 4,
+                                                    height: 7,
+                                                    '& .MuiLinearProgress-bar': { backgroundColor: '#FFD700' }
+                                                }}
+                                                value={25}
+                                                variant="determinate"
+                                            />
+                                        </Grid>
+                                    </Grid>
+                                    <Grid container alignItems="center" gap={2}>
+                                        <Grid item xs={2}>
+                                            <p>Average</p>
+                                        </Grid>
+                                        <Grid item xs={7}>
+                                            <LinearProgress sx={{ bgcolor: '#d0d0d0', borderRadius: 4, height: 7 }} value={20} variant='determinate' color='warning'></LinearProgress>
+                                        </Grid>
+                                    </Grid>
+                                    <Grid container alignItems="center" gap={2}>
+                                        <Grid item xs={2}>
+                                            <p>Poor</p>
+                                        </Grid>
+                                        <Grid item xs={7}>
+                                            <LinearProgress sx={{ bgcolor: '#d0d0d0', borderRadius: 4, height: 7 }} value={15} variant='determinate' color='error'></LinearProgress>
+                                        </Grid>
+                                    </Grid>
+                                </Box>
                             </Grid>
 
                         </Grid>
