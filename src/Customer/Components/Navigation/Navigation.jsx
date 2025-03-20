@@ -1,6 +1,6 @@
 'use client'
 
-import { Fragment, useState } from 'react'
+import { Fragment, useContext, useState } from 'react'
 import {
     Dialog,
     DialogBackdrop,
@@ -17,10 +17,20 @@ import {
 } from '@headlessui/react'
 import { Bars3Icon, MagnifyingGlassIcon, ShoppingBagIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import navigation from '../../../data/navigation'
+import { AuthContext } from '../../../Provider/AuthProvider'
+import { Link } from 'react-router-dom'
 
 
 export default function Navigation() {
     const [open, setOpen] = useState(false)
+    const { user, logOut } = useContext(AuthContext);
+    const [showProfile, setShowProfile] = useState(false);
+
+    const handleLogOut = () => {
+        logOut()
+            .then(() => { })
+            .catch(error => console.log(error));
+    }
 
     return (
         <div className="bg-white z-50">
@@ -258,9 +268,50 @@ export default function Navigation() {
 
                             <div className="ml-auto flex items-center">
                                 <div className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:space-x-6">
-                                    <a href="#" className="text-sm font-medium text-gray-700 hover:text-gray-800">
-                                        Sign in
-                                    </a>
+                                    <div className="navbar-end space-x-3 z-50">
+                                        {user ? (
+                                            <div className="relative">
+                                                <button onClick={() => setShowProfile(prev => !prev)} className="btn btn-ghost">
+                                                    <img
+                                                        src={user.photoURL}
+                                                        alt="Profile"
+                                                        className="w-8 h-8 rounded-full"
+                                                    />
+                                                </button>
+                                                {showProfile && (
+                                                    <div className="absolute right-0 mt-2 p-4 bg-white text-black shadow-lg rounded-lg w-48 md:w-64">
+                                                        <div className="flex justify-center mb-4">
+                                                            <img
+                                                                src={user.photoURL}
+                                                                alt="Profile"
+                                                                className="w-16 h-16 rounded-full object-cover"
+                                                            />
+                                                        </div>
+                                                        <div className="text-center mb-4">
+                                                            <p className="font-semibold text-lg">{user.displayName}</p>
+                                                            <p className="text-sm text-gray-600">{user.email}</p>
+                                                        </div>
+                                                        <ul className="space-y-2 mb-4">
+                                                            <li>
+                                                                <Link to="/account/order" className="text-blue-500 hover:text-blue-700 font-medium block text-center">
+                                                                    My Orders
+                                                                </Link>
+                                                            </li>
+                                                        </ul>
+                                                        <div className="flex justify-center">
+                                                            <button
+                                                                onClick={handleLogOut}
+                                                                className="btn btn-ghost w-full text-red-600 mt-4 hover:bg-red-50 focus:outline-none">
+                                                                Log Out
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                )}
+                                            </div>
+                                        ) : (
+                                            <Link to="/login" className="btn btn-primary">login</Link>
+                                        )}
+                                    </div>
                                     <span aria-hidden="true" className="h-6 w-px bg-gray-200" />
                                     <a href="#" className="text-sm font-medium text-gray-700 hover:text-gray-800">
                                         Create account

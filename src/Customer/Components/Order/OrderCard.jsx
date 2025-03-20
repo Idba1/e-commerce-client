@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 const OrderCard = () => {
     const orders = [
@@ -44,8 +45,9 @@ const OrderCard = () => {
         },
     ];
 
+    const navigate = useNavigate();
     return (
-        <div className="w-full p-4">
+        <div onClick={() => navigate(`/account/order/${5}`)} className="w-full p-4">
             {orders.length > 0 ? (
                 <div className="space-y-4">
                     {orders.map((order, index) => (
