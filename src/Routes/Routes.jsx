@@ -9,6 +9,7 @@ import ProductDetails from "../Customer/Components/ProductDetails/ProductDetails
 import Cart from "../Customer/Components/Cart/Cart";
 import CheckOut from "../Customer/Components/CheckOut/CheckOut";
 import Order from "../Customer/Components/Order/Order";
+import OrderDetails from "../Customer/Components/Order/OrderDetails";
 
 const Routes = createBrowserRouter([
     {
@@ -44,6 +45,10 @@ const Routes = createBrowserRouter([
                 {
                     path: '/order',
                     element: <Order></Order>,
+                },
+                {
+                    path: '/order-details',
+                    element: <OrderDetails></OrderDetails>,
                 },
                 {
                     path: '/check-out',
