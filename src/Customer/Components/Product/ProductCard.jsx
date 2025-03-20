@@ -1,15 +1,17 @@
 import React from "react";
-import { motion } from "framer-motion"; 
+import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 
 const ProductCard = ({ product }) => {
+    const navigate = useNavigate();
     return (
-        <motion.div
+        <motion.div onClick={() => navigate(`/product/${7}`)}
             className="max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl w-full bg-white rounded-lg shadow-lg overflow-hidden border border-gray-200"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
             whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}  
+            whileTap={{ scale: 0.95 }}
         >
             <div className="relative w-full h-64">
                 <img
@@ -18,7 +20,7 @@ const ProductCard = ({ product }) => {
                     className="w-full h-full object-contain"
                 />
             </div>
-            
+
             {/* Card Content */}
             <div className="p-4">
                 <h2 className="text-lg font-semibold text-gray-800">{product.brand}</h2>
